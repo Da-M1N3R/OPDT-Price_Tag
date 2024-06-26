@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    background-color: #0a0a23;
+    color: #fff;
+    font-family: cursive;
+}
+.header {
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 4px solid #fdb347;
+}
+.header h1{
+    margin: 5px auto;
+    padding: 0;
+    font-size: 100px;
+}
+.header h2 {
+    margin: 0 0 10px 0;
+    padding: 0;
+    font-size: 10px;
+}
+
+.gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.card {
+    margin: 10px;
+    border: 5px solid rgb(246, 5, 5);
+    border-radius: 5px;
+    position: relative;
+}
+.card img {
+    width: 100%;
+    max-width: 150px;
+    height: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    position: relative;
+    vertical-align: bottom;
+    z-index: -1;
+} 
+.card span {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 5px solid rgb(246, 5, 5);
+}
+.card > .price {
+    position: absolute; /* Make the price tag position itself absolutely */
+    top: 0; /* Position at the top of the card */
+    right: 0; /* Position at the right of the card */
+    padding: 3px 5px; /* Add some padding for better readability */
+    background-color: rgb(7, 181, 7); /* Set the background color to green */
+    color: white; /* Set text color to white for better contrast */
+    font-weight: bold; /* Make the price stand out */
+    font-size: 1em;
+    border: none;
+    border-left: 3px solid gold;
+    border-right: 3px solid gold;
+    margin: -10px -10px 0 0;
+    width: 50px;
+    clip-path: polygon(0 20%, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 80%);
+}

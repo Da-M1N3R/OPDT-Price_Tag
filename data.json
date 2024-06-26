@@ -1,0 +1,18 @@
+[
+    {
+      "name": "Luffy",
+      "image": "https://static.wikia.nocookie.net/onepiece/images/a/a9/Monkey_D._Luffy_Portrait.png/",
+      "price": 12.5
+    },
+    {
+      "name": "Zoro",
+      "image": "https://static.wikia.nocookie.net/onepiece/images/5/5d/Roronoa_Zoro_Portrait.png/",
+      "price": 12
+    },
+    {
+      "name": "Nami",
+      "image": "https://static.wikia.nocookie.net/onepiece/images/2/26/Nami_Portrait.png/",
+      "price": 10
+    }
+]
+  
