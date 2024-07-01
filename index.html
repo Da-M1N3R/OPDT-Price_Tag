@@ -11,11 +11,118 @@
         <h1>OPDT</h1>
         <h2>Build your own crew</h2>
     </header>
-    <h1>Budget = $ 100</h1>
-    <div class="gallery"></div>
+    <h1 id="budget">Budget = 100</h1>
+
+    <div class="item1">
+        <p>Luffy = <span class="price">25</span></p>
+        <button class="buy">Buy</button>
+        <button class="sell disabled" data-item-name="Luffy">Sell</button>
+    </div>
+    <div class="item2">
+        <p>Zoro = <span class="price">20</span></p>
+        <button class="buy">Buy</button>
+        <button class="sell disabled" data-item-name="Zoro">Sell</button>
+    </div>
+    <div class="item3">
+        <p>Nami = <span class="price">10</span></p>
+        <button class="buy">Buy</button>
+        <button class="sell disabled" data-item-name="Nami">Sell</button>
+    </div>
+
+    <h1>Balance/Budget = $<span id="balance">100</span></h1>
+
+    <script>
+        const budget = parseInt(document.getElementById("budget").textContent.split(" ")[2]); // Initial budget
+        const itemPrices = { // Map item names to their prices
+          "Luffy": 25,
+          "Zoro": 20,
+          "Nami": 10,
+        };
+        
+        let ownedItems = {};
+        
+        // Buy Button Function
+        function buyButton(action = "buy", itemName) {
+            console.log("Owned items:", ownedItems);
+            const price = itemPrices[itemName];
+            const balanceElement = document.getElementById("balance");
+            let balance = parseInt(balanceElement.textContent);
+
+            if (action === "buy" && balance >= price) {
+                balance -= price;
+                balanceElement.textContent = balance;
+                ownedItems[itemName] = true;
+                console.log("Owned items:", ownedItems);
+
+                // Enable sell button for bought item
+                const sellButton = document.querySelector(`.sell[data-item-name="${itemName}"]`);
+                if (sellButton) {
+                    sellButton.classList.remove("disabled");
+                }
+            } else {
+                console.error("Insufficient funds for buying or cannot sell non-owned item.");
+            }
+        }
+
+        // Sell Button Function
+        function sellButton(action = "sell", itemName) {
+            const price = itemPrices[itemName];
+            const balanceElement = document.getElementById("balance");
+            let balance = parseInt(balanceElement.textContent);
+
+            if (action === "sell" && ownedItems[itemName]) {
+                balance += price;
+                ownedItems[itemName] = false;
+
+                // Disable sell button after selling item
+                const sellButton = document.querySelector(`.sell[data-item-name="${itemName}"]`);
+                if (sellButton) {
+                    sellButton.classList.add("disabled");
+                }
+            } else {
+                console.error("Cannot sell non-owned item.");
+            }
+
+            balanceElement.textContent = balance;
+        }
+
+        function updateBalance(action, itemName) {
+          const price = itemPrices[itemName];
+          const balanceElement = document.getElementById("balance");
+          let balance = parseInt(balanceElement.textContent);
+        
+          if (action === "buy" && budget >= price) {
+            balance -= price;
+            balanceElement.textContent = balance;
+          } else if (action === "sell") {
+            balance += price;
+            balanceElement.textContent = balance;
+          } else {
+            console.error("Insufficient funds for buying or cannot sell non-owned item.");
+          }
+        }
+        
+        // Add click event listeners to buy and sell buttons
+        const buyButtons = document.querySelectorAll(".buy");
+        buyButtons.forEach(button => {
+          button.addEventListener("click", () => {
+            const itemName = button.parentElement.querySelector("p").textContent.split(" = ")[0]; // Extract item name
+            buyButton("buy", itemName);
+          });
+        });
+        
+        const sellButtons = document.querySelectorAll(".sell");
+        sellButtons.forEach(button => {
+          button.addEventListener("click", () => {
+            const itemName = button.parentElement.querySelector("p").textContent.split(" = ")[0]; // Extract item name
+            sellButton("sell", itemName);
+          });
+        });
+    </script>
+    <!-- <div class="gallery"></div>
     <h1>Balance = ???</h1>
     <h1><u>OPDT? or Other name...</u></h1>
-    <h1>Zoro, Luffy, Nami, ...</h1>
+    <h1>Zoro, Luffy, Nami, ...</h1> -->
     <script src="characterGallery.js"></script>
 </body>
 </html>
